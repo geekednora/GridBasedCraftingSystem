@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8290b75b2cbd6af45b7ad408c0444bf8, type: 3}
+  m_Name: Yellow
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: f836d41b5ee76504c9aead50abef9104, type: 3}
+  description: A Yellow is an exotic fruit rich in potassium, named by the same person
+    who named the Orange.
+  isConsumable: 1
