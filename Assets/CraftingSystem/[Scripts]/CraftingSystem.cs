@@ -4,15 +4,36 @@ using UnityEngine;
 
 public class CraftingSystem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Inventory inventory;
+    
+    public List<CraftingRecipe> craftingRecipes;
+    public ItemSlot outputSlot;
+    
+    public void CraftItem(string itemName)
     {
-        
+        CraftingRecipe recipe = GetRecipeByName(itemName);
+
+        if (recipe != null)
+        {
+            // Consume ingredients
+            foreach (var ingredient in recipe.ingredients)
+            {
+                //ItemSlot.RemoveItem(ingredient.itemName, ingredient.amount);
+            }
+
+            // Add crafted item to the inventory
+            inventory.AddItem(itemName, 1);
+
+            Debug.Log("Crafted: " + itemName);
+        }
+        else
+        {
+            Debug.Log("Cannot craft: " + itemName);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private CraftingRecipe GetRecipeByName(string itemName)
     {
-        
+        return craftingRecipes.Find(recipe => recipe.resultItemName == itemName);
     }
 }

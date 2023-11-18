@@ -15,9 +15,13 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private TMPro.TextMeshProUGUI descriptionText;
     [SerializeField]
     private TMPro.TextMeshProUGUI nameText;
-
+    [SerializeField]
+    Image itemIcon;
+    [SerializeField]
+    TextMeshProUGUI itemCountText;
     [SerializeField]
     private int count = 0;
+    
     public int Count
     {
         get { return count; }
@@ -28,17 +32,13 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
     }
 
-    [SerializeField]
-    Image itemIcon;
-
-    [SerializeField]
-    TextMeshProUGUI itemCountText;
 
     // Start is called before the first frame update
     void Start()
     {
         UpdateGraphic();
     }
+    
 
     //Change Icon and count
     void UpdateGraphic()
@@ -71,11 +71,13 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
     }
 
+    
     private bool CanUseItem()
     {
         return (item != null && count > 0);
     }
 
+    
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (item != null)
@@ -85,6 +87,7 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
     }
 
+    
     public void OnPointerExit(PointerEventData eventData)
     {
         if(item != null)
@@ -93,21 +96,43 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             nameText.text = "";
         }
     }
-
-    public void CraftItem()
+    
+    public void AddItemToSlot(Item item)
     {
-        
-        // Implement crafting logic here
-        // Example: Craft a wooden sword using 2 sticks and 2 planks
-        List<Item> recipe = new List<Item> { };
-        Item outputItem = null /*add item name*/;
-        int outputCount = 1;
-
-        if (inventory.CraftItem(recipe, outputItem, outputCount))
-        {
-            // Crafting successful, update the UI
-            UpdateGraphic();
-        }
+        this.item = item;
+        UpdateGraphic();
     }
+    
+    public bool HasItem()
+    {
+        return !string.IsNullOrEmpty(nameText.ToString()) && GetItemCount() > 0;
+    }
+
+    // Get the name of the item in the slot
+    public string GetItemName()
+    {
+        return nameText.ToString();
+    }
+
+    // Get the count of the item in the slot
+    public int GetItemCount()
+    {
+        return Count;
+    }
+
+    // Set the item in the slot
+    public void SetItem(string itemName, int itemCount)
+    {
+        this.nameText.text = itemName;
+        this.Count = itemCount;
+    }
+
+    public void ClearSlot()
+    {
+        this.item = null;
+        UpdateGraphic();
+    }
+    
+    
 }
 
