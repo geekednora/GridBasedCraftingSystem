@@ -1,27 +1,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+namespace CraftingSystem
 {
-    List<ItemSlot> itemSlots = new List<ItemSlot>();
-    private ItemSlot itemSlot = new ItemSlot();
-
-    [SerializeField]
-    GameObject inventoryPanel;
-
-    void Start()
+    public class Inventory : MonoBehaviour
     {
-        //Read all itemSlots as children of inventory panel
-        itemSlots = new List<ItemSlot>(
-            inventoryPanel.transform.GetComponentsInChildren<ItemSlot>()
-        );
-    }
+        List<ItemSlot> _itemSlots = new List<ItemSlot>();
+        private ItemSlot _itemSlot = _inventoryPanel.AddComponent<ItemSlot>();
+
+        [SerializeField] static GameObject _inventoryPanel;
+
+        private void Awake()
+        {
+            _itemSlot = GetComponent<ItemSlot>();
+        }
+
+        void Start()
+        {
+            //Read all itemSlots as children of inventory panel
+            _itemSlots = new List<ItemSlot>(_inventoryPanel.transform.GetComponentsInChildren<ItemSlot>()
+            );
+        }
     
-    public void AddItem(string itemName, int itemCount)
-    {
-        Item item = null;
-        item.name = itemName;
-        itemSlot.Count = itemCount;
+        public void AddItem(string itemName, int itemCount)
+        {
+            Item item = null;
+            item.name = itemName;
+            _itemSlot.Count = itemCount;
+        }
     }
 }
 

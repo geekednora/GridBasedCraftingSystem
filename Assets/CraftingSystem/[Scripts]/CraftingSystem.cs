@@ -1,39 +1,41 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CraftingSystem : MonoBehaviour
+namespace CraftingSystem
 {
-    public Inventory inventory;
-    
-    public List<CraftingRecipe> craftingRecipes;
-    public ItemSlot outputSlot;
-    
-    public void CraftItem(string itemName)
+    public class CraftingSystem : MonoBehaviour
     {
-        CraftingRecipe recipe = GetRecipeByName(itemName);
-
-        if (recipe != null)
+        public Inventory inventory;
+    
+        public List<CraftingRecipe> craftingRecipes;
+        public ItemSlot outputSlot;
+    
+        public void CraftItem(string itemName)
         {
-            // Consume ingredients
-            foreach (var ingredient in recipe.ingredients)
+            CraftingRecipe recipe = GetRecipeByName(itemName);
+
+            if (recipe != null)
             {
-                //ItemSlot.RemoveItem(ingredient.itemName, ingredient.amount);
+                // Consume ingredients
+                foreach (var ingredient in recipe.ingredients)
+                {
+                    //ItemSlot.RemoveItem(ingredient.itemName, ingredient.amount);
+                }
+
+                // Add crafted item to the inventory
+                inventory.AddItem(itemName, 1);
+
+                Debug.Log("Crafted: " + itemName);
             }
-
-            // Add crafted item to the inventory
-            inventory.AddItem(itemName, 1);
-
-            Debug.Log("Crafted: " + itemName);
+            else
+            {
+                Debug.Log("Cannot craft: " + itemName);
+            }
         }
-        else
+
+        private CraftingRecipe GetRecipeByName(string itemName)
         {
-            Debug.Log("Cannot craft: " + itemName);
+            return craftingRecipes.Find(recipe => recipe.resultItemName == itemName);
         }
-    }
-
-    private CraftingRecipe GetRecipeByName(string itemName)
-    {
-        return craftingRecipes.Find(recipe => recipe.resultItemName == itemName);
     }
 }
