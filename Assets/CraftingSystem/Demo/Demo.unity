@@ -2263,7 +2263,7 @@ MonoBehaviour:
   nameText: {fileID: 5564582172530291526}
   itemIcon: {fileID: 3102317421735871504}
   itemCountText: {fileID: 8105870317659774378}
-  count: 99
+  count: 10
 --- !u!1 &481374650319968834
 GameObject:
   m_ObjectHideFlags: 0
@@ -2588,7 +2588,7 @@ MonoBehaviour:
   nameText: {fileID: 5564582172530291526}
   itemIcon: {fileID: 2745197362235230972}
   itemCountText: {fileID: 9036636676015919942}
-  count: 99
+  count: 10
 --- !u!222 &770740972982649636
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2793,7 +2793,7 @@ MonoBehaviour:
   nameText: {fileID: 5564582172530291526}
   itemIcon: {fileID: 4469196503556827320}
   itemCountText: {fileID: 7310949492134572290}
-  count: 99
+  count: 10
 --- !u!114 &1221986129957867594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3313,7 +3313,7 @@ MonoBehaviour:
   nameText: {fileID: 5564582172530291526}
   itemIcon: {fileID: 3744997727064825974}
   itemCountText: {fileID: 7532433990170769868}
-  count: 99
+  count: 10
 --- !u!1 &2098498617725123770
 GameObject:
   m_ObjectHideFlags: 0
@@ -4247,13 +4247,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde951bf495780d4895d784764d28df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: 6d3f03ae983cc94438bebd419490c9b0, type: 2}
   inventory: {fileID: 0}
   descriptionText: {fileID: 1181901894}
   nameText: {fileID: 5564582172530291526}
   itemIcon: {fileID: 173154929441544166}
   itemCountText: {fileID: 6419696709174316636}
-  count: 0
+  count: 5
 --- !u!114 &3234365309553391013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4361,7 +4361,7 @@ MonoBehaviour:
   nameText: {fileID: 5564582172530291526}
   itemIcon: {fileID: 271083564001658896}
   itemCountText: {fileID: 6391564763119800746}
-  count: 99
+  count: 10
 --- !u!222 &3317530190806624828
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4495,7 +4495,7 @@ GameObject:
   - component: {fileID: 3429609245275995070}
   - component: {fileID: 3429609245275995068}
   - component: {fileID: 3429609245275995069}
-  - component: {fileID: 6007753526321235089}
+  - component: {fileID: 3429609245275995072}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -4503,6 +4503,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3429609245275995072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3429609245275995071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcc34b356e12784b9a30993611a6685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3429609245298867488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5105,7 +5117,7 @@ MonoBehaviour:
   nameText: {fileID: 5564582172530291526}
   itemIcon: {fileID: 1487462264813567076}
   itemCountText: {fileID: 5752491274119570910}
-  count: 99
+  count: 10
 --- !u!222 &4219882441364369900
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6092,13 +6104,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde951bf495780d4895d784764d28df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: e60bc6e2dc06bd64499d18c51e69720e, type: 2}
+  item: {fileID: 11400000, guid: 85a9c62155c725a4099e027ac3741440, type: 2}
   inventory: {fileID: 0}
   descriptionText: {fileID: 1181901894}
   nameText: {fileID: 5564582172530291526}
   itemIcon: {fileID: 7074334774012335343}
   itemCountText: {fileID: 4133572903316622677}
-  count: 99
+  count: 2
 --- !u!114 &5564582172530291526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6751,18 +6763,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &6007753526321235089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3429609245275995071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afcc34b356e12784b9a30993611a6685, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6036868370064916756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6850,13 +6850,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde951bf495780d4895d784764d28df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: a67043ed2c8d13e4f88e6cb4912299b9, type: 2}
   inventory: {fileID: 0}
   descriptionText: {fileID: 1181901894}
   nameText: {fileID: 5564582172530291526}
   itemIcon: {fileID: 8856623167381761028}
   itemCountText: {fileID: 2421098773777495486}
-  count: 0
+  count: 1
 --- !u!224 &6138932357447253236
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7918,7 +7918,7 @@ MonoBehaviour:
   nameText: {fileID: 5564582172530291526}
   itemIcon: {fileID: 5115481060597323520}
   itemCountText: {fileID: 2129540384891113146}
-  count: 99
+  count: 10
 --- !u!114 &7532433990170769868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9379,6 +9379,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 6005531609717545215}
+  - {fileID: 1393358669}
   - {fileID: 6005531609874970148}
   - {fileID: 1777682068}
-  - {fileID: 1393358669}

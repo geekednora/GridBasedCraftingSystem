@@ -6,13 +6,13 @@ namespace CraftingSystem
     public class CraftingSystem : MonoBehaviour
     {
         public Inventory inventory;
-    
+
         public List<CraftingRecipe> craftingRecipes;
         public ItemSlot outputSlot;
-    
+
         public void CraftItem(string itemName)
         {
-            CraftingRecipe recipe = GetRecipeByName(itemName);
+            var recipe = GetRecipeByName(itemName);
 
             if (recipe != null)
             {
