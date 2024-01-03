@@ -5,7 +5,7 @@ namespace CraftingSystem
 {
     public class CraftingGrid : MonoBehaviour
     {
-        public List<ItemSlot> slots = new List<ItemSlot>(); // Assuming you have a list of slots
+        public List<ItemSlot> slots = new(); // Assuming you have a list of slots
 
         public CraftingSystem craftingSystem; // Reference to your crafting system
 
@@ -13,26 +13,20 @@ namespace CraftingSystem
         public void CheckCraftingGrid()
         {
             foreach (var recipe in craftingSystem.craftingRecipes)
-            {
                 if (IsRecipeMatch(recipe))
                 {
                     craftingSystem.CraftItem(recipe.resultItemName);
                     ClearCraftingGrid();
                     return;
                 }
-            }
         }
 
         // Check if the crafting grid matches a given recipe
         private bool IsRecipeMatch(CraftingRecipe recipe)
         {
-            for (int i = 0; i < 9; i++)
-            {
+            for (var i = 0; i < 9; i++)
                 if (!IsSlotMatch(recipe.ingredients[i], slots[i]))
-                {
                     return false;
-                }
-            }
 
             return true;
         }
@@ -40,10 +34,8 @@ namespace CraftingSystem
         // Check if a slot matches the required ingredient
         private bool IsSlotMatch(Ingredient ingredient, ItemSlot slot)
         {
-            if (slot == null || slot.GetItemName() != ingredient.itemName || slot.GetItemCount() < ingredient.amount)
-            {
-                return false;
-            }
+            if (slot == null || slot.GetItemName() != ingredient.itemName ||
+                slot.GetItemCount() < ingredient.amount) return false;
 
             return true;
         }
@@ -52,12 +44,8 @@ namespace CraftingSystem
         private void ClearCraftingGrid()
         {
             foreach (var slot in slots)
-            {
                 if (slot != null)
-                {
                     slot.ClearSlot();
-                }
-            }
         }
     }
 }

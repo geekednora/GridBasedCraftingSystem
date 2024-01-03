@@ -1,30 +1,28 @@
-using System.Collections.Generic;
+using CraftingSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Collections;
 
 //Holds reference and count of items, manages their visibility in the Inventory panel
 public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public Item item = null;
+    public Item item;
     public Inventory inventory;
-    
-    [SerializeField]
-    private TMPro.TextMeshProUGUI descriptionText;
-    [SerializeField]
-    private TMPro.TextMeshProUGUI nameText;
-    [SerializeField]
-    Image itemIcon;
-    [SerializeField]
-    TextMeshProUGUI itemCountText;
-    [SerializeField]
-    private int count = 0;
-    
+
+    [SerializeField] private TextMeshProUGUI descriptionText;
+
+    [SerializeField] private TextMeshProUGUI nameText;
+
+    [SerializeField] private Image itemIcon;
+
+    [SerializeField] private TextMeshProUGUI itemCountText;
+
+    [SerializeField] private int count;
+
     public int Count
     {
-        get { return count; }
+        get => count;
         set
         {
             count = value;
@@ -34,14 +32,34 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         UpdateGraphic();
     }
-    
+
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (item != null)
+        {
+            descriptionText.text = item.description;
+            nameText.text = item.name;
+        }
+    }
+
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (item != null)
+        {
+            descriptionText.text = "";
+            nameText.text = "";
+        }
+    }
+
 
     //Change Icon and count
-    void UpdateGraphic()
+    private void UpdateGraphic()
     {
         if (count < 1)
         {
@@ -64,45 +82,22 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (CanUseItem())
         {
             item.Use();
-            if (item.isConsumable)
-            {
-                Count--;
-            }
+            if (item.isConsumable) Count--;
         }
     }
 
-    
+
     private bool CanUseItem()
     {
-        return (item != null && count > 0);
+        return item != null && count > 0;
     }
 
-    
-    public void OnPointerEnter(PointerEventData eventData)
+    public void AddItemToSlot(Item _item)
     {
-        if (item != null)
-        {
-            descriptionText.text = item.description;
-            nameText.text = item.name;
-        }
-    }
-
-    
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if(item != null)
-        {
-            descriptionText.text = "";
-            nameText.text = "";
-        }
-    }
-    
-    public void AddItemToSlot(Item item)
-    {
-        this.item = item;
+        item = _item;
         UpdateGraphic();
     }
-    
+
     public bool HasItem()
     {
         return !string.IsNullOrEmpty(nameText.ToString()) && GetItemCount() > 0;
@@ -123,16 +118,13 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     // Set the item in the slot
     public void SetItem(string itemName, int itemCount)
     {
-        this.nameText.text = itemName;
-        this.Count = itemCount;
+        nameText.text = itemName;
+        Count = itemCount;
     }
 
     public void ClearSlot()
     {
-        this.item = null;
+        item = null;
         UpdateGraphic();
     }
-    
-    
 }
-

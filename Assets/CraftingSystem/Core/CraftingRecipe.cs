@@ -1,16 +1,16 @@
+using System;
 using System.Collections.Generic;
 
 namespace CraftingSystem
 {
-    [System.Serializable]
+    [Serializable]
     public class CraftingRecipe
     {
         public string resultItemName;
         public List<Ingredient> ingredients;
-        
     }
 
-    [System.Serializable]
+    [Serializable]
     public class Ingredient
     {
         public string itemName;
