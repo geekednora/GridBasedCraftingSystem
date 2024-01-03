@@ -1,7 +1,7 @@
 <h1 align="center">Grid-based Crafting System for Unity</h1>
 <p align="center">
     <a href="https://github.com/geekednora/GAME3023_Midterm/blob/master/LICENSE.md"><img alt="GitHub License" src="https://img.shields.io/github/license/geekednora/GAME3023_Midterm?color=3f3f3f"></a>
-    <a href="https://github.com/geekednora"><img alt="GitHub followers" src="https://img.shields.io/github/followers/geekednora?logo=github&logoColor=ffffff&color=3f3f3f"></a>
+    <a href="https://github.com/geekednora"><img alt="GitHub followers" src="https://img.shields.io/github/followers/geekednora?style=flat&logo=github&logoColor=ffffff&color=3f3f3f"></a>
     <a href="https://discord.gg/WGbyQCjQCe"><img alt="Discord" src="https://img.shields.io/discord/783328355499114496?logo=discord&logoColor=ffffff&labelColor=6A7EC2&color=7389D8"></a>
 </p>
 
