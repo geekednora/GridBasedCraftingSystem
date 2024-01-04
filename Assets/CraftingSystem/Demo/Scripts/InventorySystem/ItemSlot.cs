@@ -4,12 +4,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 //Holds reference and count of items, manages their visibility in the Inventory panel
-namespace CraftingSystem.Core
+namespace CraftingSystem.Demo.Scripts.InventorySystem
 {
     public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public Item item;
-        public Inventory inventory;
+        private Inventory inventory;
 
         [SerializeField] private TextMeshProUGUI descriptionText;
 
@@ -87,18 +87,12 @@ namespace CraftingSystem.Core
             }
         }
 
-
         private bool CanUseItem()
         {
             return item != null && count > 0;
         }
 
-        public void AddItemToSlot(Item _item)
-        {
-            item = _item;
-            UpdateGraphic();
-        }
-
+        // Check if the slot has an item
         public bool HasItem()
         {
             return !string.IsNullOrEmpty(nameText.ToString()) && GetItemCount() > 0;
@@ -116,14 +110,22 @@ namespace CraftingSystem.Core
             return Count;
         }
 
-        // Set the item in the slot
-        public void SetItem(string itemName, int itemCount)
+        // Remove the item from the slot
+        public void ClearSlot()
         {
-            nameText.text = itemName;
-            Count = itemCount;
+            item = null;
+            UpdateGraphic();
         }
 
-        public void ClearSlot()
+        // Add an item to the slot
+        public void AddItemToSlot(Item item)
+        {
+            this.item = item;
+            UpdateGraphic();
+        }
+
+        // Remove an item from the slot
+        public void RemoveItemFromSlot()
         {
             item = null;
             UpdateGraphic();
