@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CraftingSystem
+namespace CraftingSystem.Core
 {
     [Serializable]
     public class CraftingRecipe

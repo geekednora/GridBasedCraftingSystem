@@ -2,7 +2,7 @@ using UnityEngine;
 
 //Attribute which allows right click->Create
 
-namespace CraftingSystem
+namespace CraftingSystem.Core
 {
     [CreateAssetMenu(fileName = "New Item", menuName = "Items/New Item")]
     public class

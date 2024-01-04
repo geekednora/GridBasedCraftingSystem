@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
-
 // Crafting System
-using CraftingSystem;
 
-namespace CraftingSystem
+namespace CraftingSystem.Core
 {
     public class Inventory : MonoBehaviour
     {

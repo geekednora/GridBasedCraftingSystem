@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CraftingSystem
+namespace CraftingSystem.Core
 {
     public class CraftingGrid : MonoBehaviour
     {
