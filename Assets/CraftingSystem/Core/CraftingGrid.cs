@@ -4,9 +4,6 @@ using UnityEngine;
 
 namespace CraftingSystem.Core
 {
-    /// <summary>
-    /// This is CraftingGrid class
-    /// Ch
     public class CraftingGrid : MonoBehaviour
     {
     }

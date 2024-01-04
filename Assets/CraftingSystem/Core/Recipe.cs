@@ -5,17 +5,12 @@ using UnityEngine;
 
 namespace CraftingSystem.Core
 {
-    //Attribute which allows right click->Create
-    [CreateAssetMenu(fileName = "New Recipe", menuName = "Items/New Recipe")]
-    public class Recipe : ScriptableObject //Extending SO allows us to have an object which exists in the project, not in the scene
+    [Serializable]
+    public class Recipe 
     {
         public Item _ResultItem;
         public int _ResultCount = 1;
-
-        public Item[] _RecipeItems;
-        public Vector2Int _SizeOfGrid;
         
-        public bool IsValid => _SizeOfGrid != Vector2Int.zero;
         public Item ResultItem => _ResultItem;
         public int ResultCount => _ResultCount;
         
@@ -25,4 +20,62 @@ namespace CraftingSystem.Core
             _ResultCount = resultCount;
         }
     }
+    
+    // creating a recipe from a scriptable object
+    //Attribute which allows right click->Create
+    [CreateAssetMenu(fileName = "New Recipe", menuName = "Items/New Recipe")]
+    public class RecipeItem : ScriptableObject
+    {
+        [SerializeField] public Item _ResultItem;
+        [SerializeField] public int _ResultCount = 1;
+
+        [SerializeField] public Vector2Int _SizeOfGrid;
+        [SerializeField] public Item[] _RecipeItems;
+        
+        //Used in game logic
+        private Recipe _recipe;
+        
+        // Used in editor
+        private bool _isInitialized = false;
+        private bool _isRecipeValid = false;
+
+        public Recipe Recipe
+        {
+            get
+            {
+                if (Application.isEditor || !_isInitialized)
+                {
+                    CreateRecipe();
+                    _isInitialized= true;
+                }
+
+                return _recipe;
+            }
+        }
+
+
+        // Creating a CreateRecipe() method
+        
+        private void CreateRecipe()
+        {
+            if (_SizeOfGrid == Vector2Int.zero)
+            {
+                _isRecipeValid = false;
+                return;
+            }
+
+            _isRecipeValid = false;
+            // check if at least one item is not null
+            foreach (var item in _RecipeItems)
+            {
+                if (item != null)
+                {
+                    _recipe = new Recipe(_SizeOfGrid, _RecipeItems, _ResultItem, _ResultCount);
+                    _isRecipeValid = _ResultCount > 0;
+                    return;
+                }
+            }
+        }
+    }
+    
 }

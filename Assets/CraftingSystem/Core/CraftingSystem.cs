@@ -4,10 +4,6 @@ using UnityEngine;
 
 namespace CraftingSystem.Core
 {
-    /// <summary>
-    /// Main class for crafting system
-    /// Contains core logic for crafting items using recipes via Minecraft-like crafting grid
-    /// </summary>
     public class CraftingSystem : MonoBehaviour
     {
         [SerializeField] private Inventory inventory;
