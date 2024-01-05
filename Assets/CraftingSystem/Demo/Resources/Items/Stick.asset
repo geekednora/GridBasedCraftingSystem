@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8290b75b2cbd6af45b7ad408c0444bf8, type: 3}
-  m_Name: Oil
+  m_Name: Stick
   m_EditorClassIdentifier: 
-  name: Oil
-  icon: {fileID: 21300000, guid: 07b8949c4c3faeb47a2328973bf9862f, type: 3}
-  description: A fundamental element in alchemy, and in fried chicken
-  isConsumable: 1
+  name: Stick
+  icon: {fileID: -2146795980, guid: d62ba98f3890b5343930a953d5840547, type: 3}
+  description: Hmm, can we craft a torch from this?
+  isConsumable: 0
