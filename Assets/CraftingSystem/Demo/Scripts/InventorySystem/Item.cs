@@ -5,8 +5,7 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
 {
     //Attribute which allows right click->Create
     [CreateAssetMenu(fileName = "New Item", menuName = "Items/New Item")]
-    public class
-        Item : ScriptableObject //Extending SO allows us to have an object which exists in the project, not in the scene
+    public class Item : ScriptableObject //Extending SO allows us to have an object which exists in the project, not in the scene
     {
         public new string name;
         public Sprite icon;
