@@ -14,54 +14,45 @@ namespace CraftingSystem.Core
 {
     public class CraftingGrid
     {
-        private readonly List<RecipeItem> _recipeItems = new List<RecipeItem>();
-
-        private List<RecipeItem> RecipeItems => _recipeItems;
-        public int Count => _recipeItems.Count;
-
-        private Vector2Int DefaultGridSize { get; set; } = new Vector2Int(3, 3);
-        private Vector2Int InitialPosition { get; set; } = new Vector2Int(0, 0);
-
         public CraftingGrid(IReadOnlyList<BaseItem> ingredients, Vector2Int gridSize)
         {
             for (var y = 0; y < gridSize.y; y++)
+            for (var x = 0; x < gridSize.x; x++)
             {
-                for (var x = 0; x < gridSize.x; x++)
+                var index = x + y * gridSize.x;
+                // check for null
+                if (ingredients[index] == null) continue;
+
+                // if -- Initial position = (0, 0), change it to current position
+                if (InitialPosition == new Vector2Int(0, 0))
+                    InitialPosition.Set(x, y);
+
+                var item = ingredients[index];
+                var distanceX = x - InitialPosition.x;
+                var distanceY = y - InitialPosition.y;
+
+                if (distanceX > DefaultGridSize.x) DefaultGridSize.Set(distanceX, DefaultGridSize.y);
+
+                if (distanceY > DefaultGridSize.y) DefaultGridSize.Set(DefaultGridSize.x, distanceY);
+
+                RecipeItems.Add(new RecipeItem
                 {
-                    var index = x + y * gridSize.x;
-                    // check for null
-                    if (ingredients[index] == null) continue;
-                    
-                    // if -- Initial position = (0, 0), change it to current position
-                    if (InitialPosition == new Vector2Int(0, 0))
-                        InitialPosition.Set(x, y);
-
-                    var item = ingredients[index];
-                    var distanceX = x - InitialPosition.x;
-                    var distanceY = y - InitialPosition.y;
-
-                    if (distanceX > DefaultGridSize.x)
-                    {
-                        DefaultGridSize.Set(distanceX, DefaultGridSize.y);
-                    }
-
-                    if (distanceY > DefaultGridSize.y)
-                    {
-                        DefaultGridSize.Set(DefaultGridSize.x, distanceY);
-                    }
-
-                    RecipeItems.Add(new RecipeItem()
-                    {
-                        item = item,
-                        position = new Vector2Int(distanceX, distanceY)
-                    });
-                }
+                    item = item,
+                    position = new Vector2Int(distanceX, distanceY)
+                });
             }
         }
 
+        private List<RecipeItem> RecipeItems { get; } = new();
+
+        public int Count => RecipeItems.Count;
+
+        private Vector2Int DefaultGridSize { get; } = new(3, 3);
+        private Vector2Int InitialPosition { get; } = new(0, 0);
+
         public bool isValid(CraftingGrid item)
         {
-            return item.Count == _recipeItems.Count && item.RecipeItems.SequenceEqual(_recipeItems);
+            return item.Count == RecipeItems.Count && item.RecipeItems.SequenceEqual(RecipeItems);
         }
     }
 }

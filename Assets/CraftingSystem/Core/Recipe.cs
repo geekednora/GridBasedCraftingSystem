@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using CraftingSystem.Demo.Scripts.InventorySystem;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace CraftingSystem.Core
 {
@@ -11,18 +8,16 @@ namespace CraftingSystem.Core
     {
         public BaseItem _ResultItem;
         public int _ResultCount;
-        
-        public BaseItem ResultItem => _ResultItem;
-        public int ResultCount => _ResultCount;
-        public new int Count { get; set; }
 
-        public Recipe(Vector2Int gridSize, BaseItem[] recipeItems, BaseItem resultItem, int resultCount) : base(recipeItems, gridSize)
+        public Recipe(Vector2Int gridSize, BaseItem[] recipeItems, BaseItem resultItem, int resultCount) : base(
+            recipeItems, gridSize)
         {
             _ResultItem = resultItem;
             _ResultCount = resultCount;
         }
+
+        public BaseItem ResultItem => _ResultItem;
+        public int ResultCount => _ResultCount;
+        public new int Count { get; set; }
     }
-    
-    
-    
 }

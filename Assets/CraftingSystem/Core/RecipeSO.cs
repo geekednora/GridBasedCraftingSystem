@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 namespace CraftingSystem.Core
 {
     //Attribute which allows right click->Create
@@ -13,13 +12,13 @@ namespace CraftingSystem.Core
 
         [SerializeField] public Vector2Int _SizeOfGrid;
         [SerializeField] public BaseItem[] ingredients;
-        
+
+        // Used in editor
+        private bool _isInitialized;
+        private bool _isRecipeValid;
+
         //Used in game logic
         private Recipe _recipe;
-        
-        // Used in editor
-        private bool _isInitialized = false;
-        private bool _isRecipeValid = false;
 
         // Used in editor
         public Recipe Recipe
@@ -45,7 +44,7 @@ namespace CraftingSystem.Core
                 return _isRecipeValid;
             }
         }
-    
+
         // Creating a CreateRecipe() method
         private void CreateRecipe()
         {
@@ -58,14 +57,12 @@ namespace CraftingSystem.Core
             _isRecipeValid = false;
             // check if at least one item is not null
             foreach (var item in ingredients)
-            {
                 if (item != null)
                 {
                     _recipe = new Recipe(_SizeOfGrid, ingredients, _ResultItem, _ResultCount);
                     _isRecipeValid = _ResultCount > 0;
                     return;
                 }
-            }
         }
     }
 }
