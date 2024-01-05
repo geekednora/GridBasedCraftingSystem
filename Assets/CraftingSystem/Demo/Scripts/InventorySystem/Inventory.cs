@@ -26,7 +26,7 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
         // OnEnable -> CreateItems
         private void OnEnable()
         {
-            CreateItems();
+            // CreateItems();
         }
 
         

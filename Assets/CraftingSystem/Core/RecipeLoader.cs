@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CraftingSystem.Core
 {
@@ -10,11 +11,11 @@ namespace CraftingSystem.Core
         private bool _isRecipeLoaderNull;
         private bool isLoaded;
 
-        [field: Header("Recipes Folder Path")]
+        [FormerlySerializedAs("RecipesPath")]
+        [Header("Recipes Folder Path")]
         // Path to recipes folder - ../Assets/Resources/Recipes/
         // Need to be added to Resources folder
-        [SerializeField]
-        private IEnumerable<string> RecipesPath { get; } = new[] { "Recipes/" };
+        [SerializeField] private string recipesPath = "Recipes/";
 
         private void Awake()
         {
@@ -31,9 +32,9 @@ namespace CraftingSystem.Core
         {
             _recipes.Clear();
 
-            foreach (var path in RecipesPath)
+            foreach (var path in recipesPath)
             {
-                var recipesRequest = Resources.LoadAll<RecipeSO>(path);
+                var recipesRequest = Resources.LoadAll<RecipeSO>(path.ToString());
                 yield return recipesRequest;
 
                 if (_isRecipeLoaderNull) yield break; // Check if the object is destroyed before continuing.
@@ -84,7 +85,7 @@ namespace CraftingSystem.Core
                     }
 
                     foreach (var recipe in _recipes[count - 1])
-                        if (recipe.isValid(craftingItems))
+                        if (recipe.IsValid(craftingItems))
                         {
                             resultCount = recipe.ResultCount;
                             return recipe.ResultItem;

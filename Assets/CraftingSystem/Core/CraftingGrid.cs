@@ -48,9 +48,9 @@ namespace CraftingSystem.Core
         public int Count => RecipeItems.Count;
 
         private Vector2Int DefaultGridSize { get; } = new(3, 3);
-        private Vector2Int InitialPosition { get; } = new(0, 0);
+        private Vector2Int InitialPosition { get; } = new(-1, -1);
 
-        public bool isValid(CraftingGrid item)
+        public bool IsValid(CraftingGrid item)
         {
             return item.Count == RecipeItems.Count && item.RecipeItems.SequenceEqual(RecipeItems);
         }
