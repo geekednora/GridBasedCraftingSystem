@@ -1,18 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using CraftingSystem.Core;
 using UnityEngine;
 
-public class RecipeItem : MonoBehaviour
+public class RecipeItem : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
