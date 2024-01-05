@@ -1,52 +1,58 @@
+using System.Linq;
 using System.Collections.Generic;
 using CraftingSystem.Demo.Scripts.InventorySystem;
 using UnityEngine;
 
+/*
+ * This class is responsible for storing the state of the grid
+ * and checking if the grid state matches the recipe. Also,
+ * this class is responsible for creating the grid and called
+ * in the CraftingSystem class.
+ */
+
 namespace CraftingSystem.Core
 {
-    public class CraftingGrid : MonoBehaviour
+    public class CraftingGrid
     {
-        public List<ItemSlot> slots = new(); // Assuming you have a list of slots
-
-        public CraftingSystem craftingSystem; // Reference to your crafting system
-
-        // Check the crafting grid for a valid recipe
-        public void CheckCraftingGrid()
+        public CraftingGrid(IReadOnlyList<BaseItem> ingredients, Vector2Int gridSize)
         {
-            foreach (var recipe in craftingSystem.craftingRecipes)
-                if (IsRecipeMatch(recipe))
+            for (var y = 0; y < gridSize.y; y++)
+            for (var x = 0; x < gridSize.x; x++)
+            {
+                var index = x + y * gridSize.x;
+                // check for null
+                if (ingredients[index] == null) continue;
+
+                // if -- Initial position = (0, 0), change it to current position
+                if (InitialPosition == new Vector2Int(0, 0))
+                    InitialPosition.Set(x, y);
+
+                var item = ingredients[index];
+                var distanceX = x - InitialPosition.x;
+                var distanceY = y - InitialPosition.y;
+
+                if (distanceX > DefaultGridSize.x) DefaultGridSize.Set(distanceX, DefaultGridSize.y);
+
+                if (distanceY > DefaultGridSize.y) DefaultGridSize.Set(DefaultGridSize.x, distanceY);
+
+                RecipeItems.Add(new RecipeItem
                 {
-                    craftingSystem.CraftItem(recipe.resultItemName);
-                    ClearCraftingGrid();
-                    return;
-                }
+                    item = item,
+                    position = new Vector2Int(distanceX, distanceY)
+                });
+            }
         }
 
-        // Check if the crafting grid matches a given recipe
-        private bool IsRecipeMatch(CraftingRecipe recipe)
+        private List<RecipeItem> RecipeItems { get; } = new();
+
+        public int Count => RecipeItems.Count;
+
+        private Vector2Int DefaultGridSize { get; } = new(3, 3);
+        private Vector2Int InitialPosition { get; } = new(-1, -1);
+
+        public bool IsValid(CraftingGrid item)
         {
-            for (var i = 0; i < 9; i++)
-                if (!IsSlotMatch(recipe.ingredients[i], slots[i]))
-                    return false;
-
-            return true;
-        }
-
-        // Check if a slot matches the required ingredient
-        private bool IsSlotMatch(Ingredient ingredient, ItemSlot slot)
-        {
-            if (slot == null || slot.GetItemName() != ingredient.itemName ||
-                slot.GetItemCount() < ingredient.amount) return false;
-
-            return true;
-        }
-
-        // Clear the crafting grid after crafting
-        private void ClearCraftingGrid()
-        {
-            foreach (var slot in slots)
-                if (slot != null)
-                    slot.ClearSlot();
+            return item.Count == RecipeItems.Count && item.RecipeItems.SequenceEqual(RecipeItems);
         }
     }
 }

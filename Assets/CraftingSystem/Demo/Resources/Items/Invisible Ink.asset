@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8290b75b2cbd6af45b7ad408c0444bf8, type: 3}
-  m_Name: Cap Nut
+  m_Name: Invisible Ink
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: c0c6f69c9b1b4a943a649eb5f4d191bc, type: 3}
-  description: Produces a lovely aroma when roasted
-  isConsumable: 1
+  name: Invisible Ink
+  icon: {fileID: 21300000, guid: 1509edc6e7dbea54d9cfaa212c3a8b12, type: 3}
+  description: Read the instructions carefully. Or don't, it's invisible anyway.
+  isConsumable: 0

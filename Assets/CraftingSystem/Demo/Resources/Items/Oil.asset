@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8290b75b2cbd6af45b7ad408c0444bf8, type: 3}
-  m_Name: Grapes
+  m_Name: Oil
   m_EditorClassIdentifier: 
-  name: 
-  icon: {fileID: 21300000, guid: d82b661171b8a0046a56133f0612d1db, type: 3}
-  description: "Nature's original two-bite snack. Just be careful not to start a
-    grape rebellion \u2014 they tend to roll."
+  name: Oil
+  icon: {fileID: 21300000, guid: 07b8949c4c3faeb47a2328973bf9862f, type: 3}
+  description: A fundamental element in alchemy, and in fried chicken
   isConsumable: 1

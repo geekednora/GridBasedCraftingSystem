@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,25 +12,24 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
     public class Inventory : MonoBehaviour
     {
         // Inventory items in a list.
-        private List<ItemSlot> itemSlots = new();
+        List<ItemSlot> itemSlots = new List<ItemSlot>();
 
-
-        [SerializeField] private GameObject InventoryPanel;
-        [SerializeField] private GameObject itemPrefab;
+        [SerializeField] GameObject InventoryPanel;
+        [SerializeField] GameObject itemPrefab;
 
         private void Awake()
         {
             //Read all itemSlots as children of inventory panel
-            itemSlots = new List<ItemSlot>(InventoryPanel.transform.GetComponentsInChildren<ItemSlot>()
-            );
+            itemSlots = new List<ItemSlot>( InventoryPanel.transform.GetComponentsInChildren<ItemSlot>() );
         }
 
         // OnEnable -> CreateItems
         private void OnEnable()
         {
-            //CreateItems();
+            // CreateItems();
         }
 
+        
         // Create items in the inventory.
         private void CreateItems()
         {
@@ -38,16 +38,19 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
             {
                 if (slotIndex >= itemSlots.Count)
                 {
-                    // Edit starting configuration of inventory
-                    print("Inventory is full");
+                    // Throw a warning if the inventory is full.
+                    Debug.LogWarning("Inventory is full!", context: itemSlots[slotIndex].gameObject);
                     break;
                 }
 
+                // Instantiate the item prefab and add it to the inventory.
                 var gameItem = Instantiate(itemPrefab);
                 var inventoryItem = gameItem.GetComponent<ItemSlot>();
+                
+                // Set up the item into the inventory and add it to the item slots.
                 inventoryItem.AddItemToSlot(item.item);
                 itemSlots[slotIndex].AddItemToSlot(inventoryItem.item);
-                slotIndex++;
+                slotIndex++; // Move index.
             }
         }
 
@@ -67,7 +70,6 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
                     slot.Count += itemCount;
                     return;
                 }
-
             if (emptySlot != null) return;
         }
 

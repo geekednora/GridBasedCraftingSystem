@@ -8,8 +8,8 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
 {
     public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        public Item item;
-        private Inventory inventory;
+        public Item item = null;
+        public Inventory inventory = null;
 
         [SerializeField] private TextMeshProUGUI descriptionText;
 
@@ -19,7 +19,7 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
 
         [SerializeField] private TextMeshProUGUI itemCountText;
 
-        [SerializeField] private int count;
+        [SerializeField] private int count = 0;
 
         public int Count
         {
