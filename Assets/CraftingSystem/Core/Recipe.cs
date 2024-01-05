@@ -14,7 +14,7 @@ namespace CraftingSystem.Core
         
         public BaseItem ResultItem => _ResultItem;
         public int ResultCount => _ResultCount;
-        public int Count { get; set; }
+        public new int Count { get; set; }
 
         public Recipe(Vector2Int gridSize, BaseItem[] recipeItems, BaseItem resultItem, int resultCount) : base(recipeItems, gridSize)
         {

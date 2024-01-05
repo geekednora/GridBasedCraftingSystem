@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using CraftingSystem.Demo.Scripts.InventorySystem;
 using UnityEngine;
@@ -57,7 +58,10 @@ namespace CraftingSystem.Core
                 }
             }
         }
-        
-        
+
+        public bool isValid(CraftingGrid item)
+        {
+            return item.Count == _recipeItems.Count && item.RecipeItems.SequenceEqual(_recipeItems);
+        }
     }
 }
