@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using CraftingSystem.Demo.Scripts.InventorySystem;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CraftingSystem.Core
 {
@@ -30,7 +31,7 @@ namespace CraftingSystem.Core
         [SerializeField] public int _ResultCount = 1;
 
         [SerializeField] public Vector2Int _SizeOfGrid;
-        [SerializeField] public Item[] _RecipeItems;
+        [SerializeField] public Item[] ingredients;
         
         //Used in game logic
         private Recipe _recipe;
@@ -66,11 +67,11 @@ namespace CraftingSystem.Core
 
             _isRecipeValid = false;
             // check if at least one item is not null
-            foreach (var item in _RecipeItems)
+            foreach (var item in ingredients)
             {
                 if (item != null)
                 {
-                    _recipe = new Recipe(_SizeOfGrid, _RecipeItems, _ResultItem, _ResultCount);
+                    _recipe = new Recipe(_SizeOfGrid, ingredients, _ResultItem, _ResultCount);
                     _isRecipeValid = _ResultCount > 0;
                     return;
                 }
