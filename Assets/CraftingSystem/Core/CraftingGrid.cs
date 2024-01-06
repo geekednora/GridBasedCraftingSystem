@@ -17,29 +17,31 @@ namespace CraftingSystem.Core
         public CraftingGrid(IReadOnlyList<Item> ingredients, Vector2Int gridSize)
         {
             for (var y = 0; y < gridSize.y; y++)
-            for (var x = 0; x < gridSize.x; x++)
             {
-                var index = x + y * gridSize.x;
-                // check for null
-                if (ingredients[index] == null) continue;
-
-                // if -- Initial position = (0, 0), change it to current position
-                if (InitialPosition == new Vector2Int(0, 0))
-                    InitialPosition.Set(x, y);
-
-                var item = ingredients[index];
-                var distanceX = x - InitialPosition.x;
-                var distanceY = y - InitialPosition.y;
-
-                if (distanceX > DefaultGridSize.x) DefaultGridSize.Set(distanceX, DefaultGridSize.y);
-
-                if (distanceY > DefaultGridSize.y) DefaultGridSize.Set(DefaultGridSize.x, distanceY);
-
-                RecipeItems.Add(new RecipeItem
+                for (var x = 0; x < gridSize.x; x++)
                 {
-                    item = item,
-                    position = new Vector2Int(distanceX, distanceY)
-                });
+                    var index = x + y * gridSize.x;
+                    // check for null
+                    if (ingredients[index] == null) continue;
+
+                    // if -- Initial position = (0, 0), change it to current position
+                    if (InitialPosition == new Vector2Int(0, 0))
+                        InitialPosition.Set(x, y);
+
+                    var item = ingredients[index];
+                    var distanceX = x - InitialPosition.x;
+                    var distanceY = y - InitialPosition.y;
+
+                    if (distanceX > DefaultGridSize.x) DefaultGridSize.Set(distanceX, DefaultGridSize.y);
+
+                    if (distanceY > DefaultGridSize.y) DefaultGridSize.Set(DefaultGridSize.x, distanceY);
+
+                    RecipeItems.Add(new RecipeItem
+                    {
+                        item = item,
+                        position = new Vector2Int(distanceX, distanceY)
+                    });
+                }
             }
         }
 

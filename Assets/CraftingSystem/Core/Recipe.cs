@@ -18,6 +18,5 @@ namespace CraftingSystem.Core
 
         public Item ResultItem => _ResultItem;
         public int ResultCount => _ResultCount;
-        public new int Count { get; set; }
     }
 }

@@ -25,9 +25,11 @@ namespace CraftingSystem.Core
         {
             get
             {
-                if (!Application.isEditor && _isInitialized) return _recipe;
-                CreateRecipe();
-                _isInitialized = true;
+                if (Application.isEditor || !_isInitialized)
+                {
+                    CreateRecipe();
+                    _isInitialized = true;
+                }
 
                 return _recipe;
             }
@@ -38,9 +40,12 @@ namespace CraftingSystem.Core
         {
             get
             {
-                if (!Application.isEditor && _isInitialized) return _isRecipeValid;
-                CreateRecipe();
-                _isInitialized = true;
+                if (Application.isEditor || !_isInitialized)
+                {
+                    CreateRecipe();
+                    _isInitialized = true;
+                }
+
                 return _isRecipeValid;
             }
         }
@@ -57,12 +62,15 @@ namespace CraftingSystem.Core
             _isRecipeValid = false;
             // check if at least one item is not null
             foreach (var item in ingredients)
+            {
                 if (item != null)
                 {
                     _recipe = new Recipe(_SizeOfGrid, ingredients, _ResultItem, _ResultCount);
                     _isRecipeValid = _ResultCount > 0;
                     return;
                 }
+            }
+                
         }
     }
 }

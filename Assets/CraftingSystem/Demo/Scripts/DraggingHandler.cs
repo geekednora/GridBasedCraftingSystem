@@ -14,6 +14,8 @@ namespace CraftingSystem.Demo.Scripts
         private Image _image;
         public EventSystem eventSystem;
         private ItemSlot _itemSlot;
+        
+        public event Action<Item> OnItemDropped;
         private bool Dragging { get; set; } = false;
 
         private void Awake()
@@ -117,7 +119,8 @@ namespace CraftingSystem.Demo.Scripts
 
             Dragging = false;
             
-            Debug.Log("Hit item slot: " + itemSlot.GetItemName());
+            // Calling event to update the crafting system
+            OnItemDropped?.Invoke(item);
         }
         
         private void TakeItemFromSlot(ItemSlot itemSlot)

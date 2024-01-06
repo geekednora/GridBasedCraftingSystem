@@ -24,29 +24,25 @@ namespace CraftingSystem.Core
 
         private void Start()
         {
-            StartCoroutine(LoadRecipesAsync());
+            LoadRecipesAsync();
         }
 
 
-        private IEnumerator LoadRecipesAsync()
+        private void LoadRecipesAsync()
         {
             _recipes.Clear();
-
-            foreach (var path in recipesPath)
-            {
-                var recipesRequest = Resources.LoadAll<RecipeSO>(path.ToString());
-                yield return recipesRequest;
-
-                if (_isRecipeLoaderNull) yield break; // Check if the object is destroyed before continuing.
-
-                foreach (var recipe in recipesRequest)
-                    if (recipe.IsValid)
-                    {
-                        // Check if there is enough space in the list
-                        CheckCapacity(recipe.Recipe.Count);
-                        _recipes[recipe.Recipe.Count - 1].Add(recipe.Recipe);
-                    }
-            }
+            
+            var recipesRequest = Resources.LoadAll<RecipeSO>(recipesPath);
+            // yield return recipesRequest;
+            
+            foreach (var recipe in recipesRequest)
+                if (recipe.IsValid)
+                {
+                    // Check if there is enough space in the list
+                    CheckCapacity(recipe.Recipe.Count);
+                    _recipes[recipe.Recipe.Count - 1].Add(recipe.Recipe);
+                }
+            
 
             isLoaded = true;
         }
@@ -71,29 +67,27 @@ namespace CraftingSystem.Core
             var craftingItems = new CraftingGrid(items, gridSize);
             var count = craftingItems.Count;
 
-            switch (count)
+            if (count == 0)
             {
-                case 0:
-                    resultCount = 0;
-                    return null;
-
-                default:
-                    if (count > _recipes.Count || _recipes[count - 1] == null)
-                    {
-                        resultCount = 0;
-                        return null;
-                    }
-
-                    foreach (var recipe in _recipes[count - 1])
-                        if (recipe.IsValid(craftingItems))
-                        {
-                            resultCount = recipe.ResultCount;
-                            return recipe.ResultItem;
-                        }
-
-                    resultCount = 0;
-                    return null;
+                resultCount = 0;
+                return null;
             }
+
+            if (count > _recipes.Count || _recipes[count - 1] == null)
+            {
+                resultCount = 0;
+                return null;
+            }
+
+            foreach (var recipe in _recipes[count - 1])
+                if (recipe.IsValid(craftingItems))
+                {
+                    resultCount = recipe.ResultCount;
+                    return recipe.ResultItem;
+                }
+
+            resultCount = 0;
+            return null;
         }
     }
 }
