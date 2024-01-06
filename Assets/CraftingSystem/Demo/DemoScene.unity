@@ -2260,6 +2260,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 170851085}
     m_Modifications:
+    - target: {fileID: 1098820302721575804, guid: 80fe0d3f727f69b428a6da25d5b7f260, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1098820302721575806, guid: 80fe0d3f727f69b428a6da25d5b7f260, type: 3}
       propertyPath: m_Name
       value: ItemSlot
@@ -2556,7 +2560,7 @@ MonoBehaviour:
   nameText: {fileID: 5564582172530291526}
   itemIcon: {fileID: 3102317421735871504}
   itemCountText: {fileID: 8105870317659774378}
-  count: 10
+  count: 4
 --- !u!1 &481374650319968834
 GameObject:
   m_ObjectHideFlags: 0
@@ -2767,13 +2771,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde951bf495780d4895d784764d28df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingItem: {fileID: 11400000, guid: 1ec09593f41b14a4098f3cc10fc51ea9, type: 2}
+  startingItem: {fileID: 11400000, guid: 57896d6733c1f8543a9f785b61953eed, type: 2}
   inventory: {fileID: 0}
   descriptionText: {fileID: 1181901894}
   nameText: {fileID: 5564582172530291526}
   itemIcon: {fileID: 2745197362235230972}
   itemCountText: {fileID: 9036636676015919942}
-  count: 10
+  count: 4
 --- !u!222 &806674281399857565
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3242,13 +3246,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde951bf495780d4895d784764d28df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingItem: {fileID: 0}
+  startingItem: {fileID: 11400000, guid: 1ec09593f41b14a4098f3cc10fc51ea9, type: 2}
   inventory: {fileID: 0}
   descriptionText: {fileID: 1181901894}
   nameText: {fileID: 5564582172530291526}
   itemIcon: {fileID: 3744997727064825974}
   itemCountText: {fileID: 7532433990170769868}
-  count: 0
+  count: 4
 --- !u!1 &2098498617725123770
 GameObject:
   m_ObjectHideFlags: 0
@@ -3985,13 +3989,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde951bf495780d4895d784764d28df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingItem: {fileID: 0}
+  startingItem: {fileID: 11400000, guid: 1ec09593f41b14a4098f3cc10fc51ea9, type: 2}
   inventory: {fileID: 0}
   descriptionText: {fileID: 1181901894}
   nameText: {fileID: 5564582172530291526}
   itemIcon: {fileID: 271083564001658896}
   itemCountText: {fileID: 6391564763119800746}
-  count: 0
+  count: 6
 --- !u!224 &3322501646487291621
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4601,7 +4605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde951bf495780d4895d784764d28df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingItem: {fileID: 11400000, guid: 57896d6733c1f8543a9f785b61953eed, type: 2}
+  startingItem: {fileID: 11400000, guid: 7e6c451c8819ea24280736b333d21017, type: 2}
   inventory: {fileID: 0}
   descriptionText: {fileID: 1181901894}
   nameText: {fileID: 5564582172530291526}
@@ -6855,13 +6859,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde951bf495780d4895d784764d28df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingItem: {fileID: 11400000, guid: 7e6c451c8819ea24280736b333d21017, type: 2}
+  startingItem: {fileID: 11400000, guid: 57896d6733c1f8543a9f785b61953eed, type: 2}
   inventory: {fileID: 0}
   descriptionText: {fileID: 1181901894}
   nameText: {fileID: 5564582172530291526}
   itemIcon: {fileID: 5115481060597323520}
   itemCountText: {fileID: 2129540384891113146}
-  count: 10
+  count: 1
 --- !u!114 &7532433990170769868
 MonoBehaviour:
   m_ObjectHideFlags: 0

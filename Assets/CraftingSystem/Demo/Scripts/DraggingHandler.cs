@@ -15,7 +15,7 @@ namespace CraftingSystem.Demo.Scripts
         public EventSystem eventSystem;
         private ItemSlot _itemSlot;
         
-        public event Action<Item> OnItemDropped;
+        public event Action<ItemSlot> OnItemDropped;
         private bool Dragging { get; set; } = false;
 
         private void Awake()
@@ -120,7 +120,7 @@ namespace CraftingSystem.Demo.Scripts
             Dragging = false;
             
             // Calling event to update the crafting system
-            OnItemDropped?.Invoke(item);
+            OnItemDropped?.Invoke(_itemSlot);
         }
         
         private void TakeItemFromSlot(ItemSlot itemSlot)

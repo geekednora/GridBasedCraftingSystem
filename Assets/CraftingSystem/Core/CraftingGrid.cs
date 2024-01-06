@@ -14,8 +14,17 @@ namespace CraftingSystem.Core
 {
     public class CraftingGrid
     {
+        private List<RecipeItem> RecipeItems { get; } = new();
+
+        public int Count => RecipeItems.Count;
+
+        
+        
         public CraftingGrid(IReadOnlyList<Item> ingredients, Vector2Int gridSize)
         {
+            Vector2Int defaultGridSize = new Vector2Int(0, 0);
+            Vector2Int initialPosition = new Vector2Int(-1, -1);
+            
             for (var y = 0; y < gridSize.y; y++)
             {
                 for (var x = 0; x < gridSize.x; x++)
@@ -24,17 +33,17 @@ namespace CraftingSystem.Core
                     // check for null
                     if (ingredients[index] == null) continue;
 
-                    // if -- Initial position = (0, 0), change it to current position
-                    if (InitialPosition == new Vector2Int(0, 0))
-                        InitialPosition.Set(x, y);
+                    // if -- Initial position = (-1, -1), change it to current position
+                    if (initialPosition == new Vector2Int(-1, -1))
+                        initialPosition.Set(x, y);
 
                     var item = ingredients[index];
-                    var distanceX = x - InitialPosition.x;
-                    var distanceY = y - InitialPosition.y;
+                    var distanceX = x - initialPosition.x;
+                    var distanceY = y - initialPosition.y;
 
-                    if (distanceX > DefaultGridSize.x) DefaultGridSize.Set(distanceX, DefaultGridSize.y);
+                    if (distanceX > defaultGridSize.x) defaultGridSize.Set(distanceX, defaultGridSize.y);
 
-                    if (distanceY > DefaultGridSize.y) DefaultGridSize.Set(DefaultGridSize.x, distanceY);
+                    if (distanceY > defaultGridSize.y) defaultGridSize.Set(defaultGridSize.x, distanceY);
 
                     RecipeItems.Add(new RecipeItem
                     {
@@ -44,13 +53,6 @@ namespace CraftingSystem.Core
                 }
             }
         }
-
-        private List<RecipeItem> RecipeItems { get; } = new();
-
-        public int Count => RecipeItems.Count;
-
-        private Vector2Int DefaultGridSize { get; } = new(3, 3);
-        private Vector2Int InitialPosition { get; } = new(-1, -1);
 
         public bool IsValid(CraftingGrid item)
         {
