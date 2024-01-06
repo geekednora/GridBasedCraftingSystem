@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,18 +7,20 @@ using UnityEngine.UI;
 //Holds reference and count of items, manages their visibility in the Inventory panel
 namespace CraftingSystem.Demo.Scripts.InventorySystem
 {
-    public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
         public Item item = null;
         public Inventory inventory = null;
 
+        private RectTransform _rectTransform;
+        
         [SerializeField] private TextMeshProUGUI descriptionText;
 
         [SerializeField] private TextMeshProUGUI nameText;
 
         [SerializeField] private Image itemIcon;
 
-        [SerializeField] private TextMeshProUGUI itemCountText;
+        [SerializeField] private TMP_Text itemCountText;
 
         [SerializeField] private int count = 0;
 
@@ -30,12 +33,28 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
                 UpdateGraphic();
             }
         }
+        
+        public void StackItems(ItemSlot other)
+        {
+            if (item.name != other.name)
+            {
+                Debug.LogException(new UnityException("Cannot stack items of different types"));
+            }
+            
+            Count += other.Count;
+            Destroy(other.gameObject);
+        }
 
 
         // Start is called before the first frame update
         private void Start()
         {
             UpdateGraphic();
+        }
+
+        private void Awake()
+        {
+            _rectTransform = GetComponent<RectTransform>();
         }
 
 
@@ -111,7 +130,7 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
         }
 
         // Remove the item from the slot
-        public void ClearSlot()
+        public void RemoveFromSlot()
         {
             item = null;
             UpdateGraphic();
@@ -129,6 +148,71 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
         {
             item = null;
             UpdateGraphic();
+        }
+
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                var tempParent = GameObject.FindGameObjectWithTag("TempParent");
+                if (tempParent == null)
+                    throw new MissingReferenceException("Editor can't find TempParent");
+
+                _rectTransform.SetParent(tempParent.transform);
+
+                RemoveFromSlot();
+
+                itemIcon.raycastTarget = false;
+                return;
+            }
+
+            if (eventData.button == PointerEventData.InputButton.Right)
+            {
+                var tempParent = GameObject.FindGameObjectWithTag("TempParent");
+                if (tempParent == null)
+                    throw new MissingReferenceException("Editor can't find TempParent");
+                _rectTransform.SetParent(tempParent.transform);
+
+                var slot = this;
+                RemoveFromSlot();
+                
+                if (count > 1)
+                {
+                    
+                    var newDraggableItem = Instantiate(inventory.itemPrefab, transform.position, Quaternion.identity).GetComponent<ItemSlot>();
+                    newDraggableItem.AddItemToSlot(item);
+                    newDraggableItem.count = count - 1;
+                    slot.AddItemToSlot(newDraggableItem.item);
+                    newDraggableItem.GoToSlot();
+                    Count = 1;
+                }
+
+                itemIcon.raycastTarget = false;
+            }
+        }
+        
+        public void GoToSlot()
+        {
+            if (this == null)
+                return;
+
+            _rectTransform.SetParent(this.transform);
+            _rectTransform.anchoredPosition = Vector2.zero;
+            _rectTransform.localScale = Vector3.one;
+        }
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            itemIcon.raycastTarget = true;
+            if (this != null)
+            {
+                inventory.AddItem(this.name, this.count);
+            }
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            transform.position = eventData.position;
         }
     }
 }

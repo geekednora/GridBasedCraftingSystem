@@ -15,7 +15,7 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
         List<ItemSlot> itemSlots = new List<ItemSlot>();
 
         [SerializeField] GameObject InventoryPanel;
-        [SerializeField] GameObject itemPrefab;
+        [SerializeField] public GameObject itemPrefab;
 
         private void Awake()
         {
