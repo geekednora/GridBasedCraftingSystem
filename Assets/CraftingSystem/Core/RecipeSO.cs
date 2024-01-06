@@ -7,11 +7,11 @@ namespace CraftingSystem.Core
     [Icon("Assets/CraftingSystem/Icons/Recipe.png")]
     public class RecipeSO : ScriptableObject
     {
-        [SerializeField] public BaseItem _ResultItem;
+        [SerializeField] public Item _ResultItem;
         [SerializeField] public int _ResultCount = 1;
 
         [SerializeField] public Vector2Int _SizeOfGrid;
-        [SerializeField] public BaseItem[] ingredients;
+        [SerializeField] public Item[] ingredients;
 
         // Used in editor
         private bool _isInitialized;

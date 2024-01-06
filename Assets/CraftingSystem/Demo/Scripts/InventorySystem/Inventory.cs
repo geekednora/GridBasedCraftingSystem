@@ -48,8 +48,8 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
                 var inventoryItem = gameItem.GetComponent<ItemSlot>();
                 
                 // Set up the item into the inventory and add it to the item slots.
-                inventoryItem.AddItemToSlot(item.item);
-                itemSlots[slotIndex].AddItemToSlot(inventoryItem.item);
+                inventoryItem.AddItemToSlot(item.Item);
+                itemSlots[slotIndex].AddItemToSlot(inventoryItem.Item);
                 slotIndex++; // Move index.
             }
         }
@@ -60,12 +60,12 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
             ItemSlot emptySlot = null;
 
             foreach (var slot in itemSlots)
-                if (slot.item == null)
+                if (slot.Item == null)
                 {
                     if (emptySlot == null)
                         emptySlot = slot;
                 }
-                else if (slot.item.name == itemName)
+                else if (slot.Item.name == itemName)
                 {
                     slot.Count += itemCount;
                     return;
@@ -77,7 +77,7 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
         public void RemoveItem(string itemName, int itemCount)
         {
             foreach (var slot in itemSlots)
-                if (slot.item != null && slot.item.name == itemName)
+                if (slot.Item != null && slot.Item.name == itemName)
                 {
                     slot.Count -= itemCount;
                     return;

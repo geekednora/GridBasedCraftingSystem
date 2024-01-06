@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Overworld
   - Town
-  - TempParent
   layers:
   - Default
   - TransparentFX

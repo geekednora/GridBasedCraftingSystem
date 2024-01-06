@@ -59,7 +59,7 @@ namespace CraftingSystem.Core
         // TODO: Add a method to unload recipes from memory
 
         // Checking grid state to find matching recipes and return the result item
-        public BaseItem CheckGridState(BaseItem[] items, Vector2Int gridSize, out int resultCount)
+        public Item CheckGridState(Item[] items, Vector2Int gridSize, out int resultCount)
         {
             if (!isLoaded)
             {

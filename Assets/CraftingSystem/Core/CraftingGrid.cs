@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Collections.Generic;
-using CraftingSystem.Demo.Scripts.InventorySystem;
+using CraftingSystem.Demo.Scripts;
 using UnityEngine;
 
 /*
@@ -14,7 +14,7 @@ namespace CraftingSystem.Core
 {
     public class CraftingGrid
     {
-        public CraftingGrid(IReadOnlyList<BaseItem> ingredients, Vector2Int gridSize)
+        public CraftingGrid(IReadOnlyList<Item> ingredients, Vector2Int gridSize)
         {
             for (var y = 0; y < gridSize.y; y++)
             for (var x = 0; x < gridSize.x; x++)
