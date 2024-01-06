@@ -8,7 +8,6 @@ namespace CraftingSystem.Core
     public class RecipeLoader : MonoBehaviour
     {
         private readonly List<List<Recipe>> _recipes = new();
-        private bool _isRecipeLoaderNull;
         private bool isLoaded;
 
         [FormerlySerializedAs("RecipesPath")]
@@ -17,10 +16,6 @@ namespace CraftingSystem.Core
         // Need to be added to Resources folder
         [SerializeField] private string recipesPath = "Recipes/";
 
-        private void Awake()
-        {
-            _isRecipeLoaderNull = this == null;
-        }
 
         private void Start()
         {
