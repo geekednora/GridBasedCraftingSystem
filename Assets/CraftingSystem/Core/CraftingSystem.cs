@@ -1,4 +1,6 @@
+﻿using System;
 using System.Collections.Generic;
+using CraftingSystem.Demo.Scripts;
 using CraftingSystem.Demo.Scripts.InventorySystem;
 using UnityEngine;
 
@@ -6,24 +8,64 @@ namespace CraftingSystem.Core
 {
     public class CraftingSystem : MonoBehaviour
     {
-        [SerializeField] private Inventory inventory;
-        [SerializeField] private CraftingGrid _craftingGrid;
-        [SerializeField] private List<Recipe> recipes;
-
+        [SerializeField] private ItemSlot[] _CraftingSlots;
+        [SerializeField] private ItemSlot _ResultSlot;
+        
+        private RecipeLoader _recipeLoader;
+        
         private void Start()
         {
+            DraggingHandler draggingHandler = FindObjectOfType<DraggingHandler>();
+            draggingHandler.OnItemDropped += OnItemDropped;
+            
+            _recipeLoader = FindObjectOfType<RecipeLoader>();
         }
-        
-        // TODO: Implement crafting logic
-        // Crafting logic:
-        // 1. Check if there is a recipe for the items in the crafting grid
-        // 2. If there is a recipe, check if there is enough items in the inventory
-        // 3. If there is enough items in the inventory, remove the items from the inventory and add the crafted item to the inventory
-        // 4. If there is not enough items in the inventory, do not craft the item and display a message to the player
-        
-        public void CraftItem()
+
+        private void OnItemDropped(ItemSlot obj)
         {
+            if (obj == _ResultSlot)
+            {
+                CraftItem();
+                CheckCraftingSlots();
+            }
+            else
+            {
+                CheckCraftingSlots();
+            }
+            
         }
-        
+
+        private void CheckCraftingSlots()
+        {
+            List<Item> items = new List<Item>();
+
+            foreach (var craftingSlot in _CraftingSlots)
+                items.Add(craftingSlot.Item);
+
+
+            Item item = _recipeLoader.CheckGridState(items.ToArray(), new Vector2Int(3, 3), out var resultCount);
+            if (item != null)
+            {
+                _ResultSlot.Count = resultCount;
+                _ResultSlot.Item = item;
+                Debug.Log("Crafted item: " + item.name);
+                Debug.Log("Crafted item count: " + resultCount);
+            }
+            else
+            {
+                
+                _ResultSlot.Count = 0;
+                _ResultSlot.Item = null;
+            
+            }
+        }
+
+        private void CraftItem()
+        {
+            foreach (var craftingSlot in _CraftingSlots)
+            {
+                craftingSlot.Count -= 1;
+            }
+        }
     }
 }

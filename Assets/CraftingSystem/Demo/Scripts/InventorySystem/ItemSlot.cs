@@ -1,3 +1,5 @@
+using System;
+using CraftingSystem.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,16 +10,30 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
 {
     public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        public Item item = null;
+        [SerializeField] Item startingItem = null;
+        private Item _item;
+        public Item Item
+        {
+            get => _item;
+            set
+            {
+                _item = value;
+                UpdateGraphic();
+            }
+        }
+        
+        
         public Inventory inventory = null;
 
+        private RectTransform _rectTransform;
+        
         [SerializeField] private TextMeshProUGUI descriptionText;
 
         [SerializeField] private TextMeshProUGUI nameText;
 
         [SerializeField] private Image itemIcon;
 
-        [SerializeField] private TextMeshProUGUI itemCountText;
+        [SerializeField] private TMP_Text itemCountText;
 
         [SerializeField] private int count = 0;
 
@@ -35,23 +51,29 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
         // Start is called before the first frame update
         private void Start()
         {
+            _item = startingItem;
             UpdateGraphic();
+        }
+
+        private void Awake()
+        {
+            _rectTransform = GetComponent<RectTransform>();
         }
 
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (item != null)
+            if (Item != null)
             {
-                descriptionText.text = item.description;
-                nameText.text = item.name;
+                descriptionText.text = Item.description;
+                nameText.text = Item.name;
             }
         }
 
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (item != null)
+            if (Item != null)
             {
                 descriptionText.text = "";
                 nameText.text = "";
@@ -62,16 +84,16 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
         //Change Icon and count
         private void UpdateGraphic()
         {
-            if (count < 1)
+            if (count < 1 || Item == null)
             {
-                item = null;
+                _item = null;
                 itemIcon.gameObject.SetActive(false);
                 itemCountText.gameObject.SetActive(false);
             }
             else
             {
                 //set sprite to the one from the item
-                itemIcon.sprite = item.icon;
+                itemIcon.sprite = Item.icon;
                 itemIcon.gameObject.SetActive(true);
                 itemCountText.gameObject.SetActive(true);
                 itemCountText.text = count.ToString();
@@ -82,14 +104,14 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
         {
             if (CanUseItem())
             {
-                item.Use();
-                if (item.isConsumable) Count--;
+                Item.Use();
+                if (Item.isConsumable) Count--;
             }
         }
 
         private bool CanUseItem()
         {
-            return item != null && count > 0;
+            return Item != null && count > 0;
         }
 
         // Check if the slot has an item
@@ -111,23 +133,23 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
         }
 
         // Remove the item from the slot
-        public void ClearSlot()
+        public void RemoveFromSlot()
         {
-            item = null;
+            Item = null;
             UpdateGraphic();
         }
 
         // Add an item to the slot
         public void AddItemToSlot(Item item)
         {
-            this.item = item;
+            this.Item = item;
             UpdateGraphic();
         }
 
         // Remove an item from the slot
         public void RemoveItemFromSlot()
         {
-            item = null;
+            Item = null;
             UpdateGraphic();
         }
     }

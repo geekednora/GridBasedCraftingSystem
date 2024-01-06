@@ -6,7 +6,7 @@ namespace CraftingSystem.Core
     [Serializable]
     public struct RecipeItem // Creating struct for recipe item
     {
-        public BaseItem item;
+        public Item item;
 
         // Initial position = (0, 0)
         public Vector2Int position;

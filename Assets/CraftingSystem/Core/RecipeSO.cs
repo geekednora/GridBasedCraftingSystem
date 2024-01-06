@@ -7,11 +7,11 @@ namespace CraftingSystem.Core
     [Icon("Assets/CraftingSystem/Icons/Recipe.png")]
     public class RecipeSO : ScriptableObject
     {
-        [SerializeField] public BaseItem _ResultItem;
+        [SerializeField] public Item _ResultItem;
         [SerializeField] public int _ResultCount = 1;
 
         [SerializeField] public Vector2Int _SizeOfGrid;
-        [SerializeField] public BaseItem[] ingredients;
+        [SerializeField] public Item[] ingredients;
 
         // Used in editor
         private bool _isInitialized;
@@ -25,9 +25,11 @@ namespace CraftingSystem.Core
         {
             get
             {
-                if (!Application.isEditor && _isInitialized) return _recipe;
-                CreateRecipe();
-                _isInitialized = true;
+                if (Application.isEditor || !_isInitialized)
+                {
+                    CreateRecipe();
+                    _isInitialized = true;
+                }
 
                 return _recipe;
             }
@@ -38,9 +40,12 @@ namespace CraftingSystem.Core
         {
             get
             {
-                if (!Application.isEditor && _isInitialized) return _isRecipeValid;
-                CreateRecipe();
-                _isInitialized = true;
+                if (Application.isEditor || !_isInitialized)
+                {
+                    CreateRecipe();
+                    _isInitialized = true;
+                }
+
                 return _isRecipeValid;
             }
         }
@@ -57,12 +62,15 @@ namespace CraftingSystem.Core
             _isRecipeValid = false;
             // check if at least one item is not null
             foreach (var item in ingredients)
+            {
                 if (item != null)
                 {
                     _recipe = new Recipe(_SizeOfGrid, ingredients, _ResultItem, _ResultCount);
                     _isRecipeValid = _ResultCount > 0;
                     return;
                 }
+            }
+                
         }
     }
 }

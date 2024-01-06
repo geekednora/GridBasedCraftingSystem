@@ -1,7 +1,6 @@
 using UnityEngine;
 
-
-namespace CraftingSystem.Demo.Scripts.InventorySystem
+namespace CraftingSystem.Core
 {
     //Attribute which allows right click->Create
     [CreateAssetMenu(fileName = "New Item", menuName = "Items/New Item")]
@@ -21,5 +20,7 @@ namespace CraftingSystem.Demo.Scripts.InventorySystem
         {
             Debug.Log("This is the Use() function of item: " + name + " - " + description);
         }
+        
+        
     }
 }
