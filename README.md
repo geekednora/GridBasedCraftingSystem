@@ -8,7 +8,7 @@
 Welcome to the Grid-based Crafting System for Unity repository! Crafting system is designed for Unity developers, providing a grid-based approach to crafting in your games. Whether you're creating a survival game, sandbox adventure, or any project that involves crafting mechanics, this asset is tailored to meet your needs.
 
 ## Guide
-![Youtube Tutorial](https://youtu.be/_nuSJ4fdB9s)
+[Youtube Short Description](https://youtu.be/f9MrH_BdV6Y?si=DHi5dWCfMMjWwQGC)
 
 ## Features
 - **Grid-based Crafting:** Craft items using a grid system for a intuitive crafting experience.
